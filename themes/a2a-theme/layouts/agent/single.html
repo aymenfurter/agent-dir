@@ -16,9 +16,9 @@
             <div class="container">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" style="margin-bottom: var(--space-8); opacity: 0.8;">
-                    <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a>
+                    <a href="{{ .Site.BaseURL }}" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a>
                     <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
-                    <a href="/agents/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Agents</a>
+                    <a href="{{ .Site.BaseURL }}agents/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Agents</a>
                     <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
                     <span style="color: white;">{{ $agent.name }}</span>
                 </nav>
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     <i class="fas fa-robot" style="font-size: 4rem; color: var(--text-muted); margin-bottom: var(--space-6);"></i>
     <h1 style="margin-bottom: var(--space-4);">Agent Not Found</h1>
     <p style="margin-bottom: var(--space-8); color: var(--text-muted);">The agent you're looking for doesn't exist or has been removed.</p>
-    <a href="/agents/" class="btn btn-primary">Browse All Agents</a>
+    <a href="{{ .Site.BaseURL }}agents/" class="btn btn-primary">Browse All Agents</a>
 </div>
 {{ end }}
 

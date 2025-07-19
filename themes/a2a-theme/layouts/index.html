@@ -6,10 +6,10 @@
         <p>A Git-based template for documenting and discovering your A2A-compatible agents. Perfect for maintaining an internal agent inventory and enabling team discoverability.</p>
         <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 2rem;"><em>Note: This is a sample implementation, not affiliated with the official A2A protocol</em></p>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/agents/" class="btn btn-primary">
+            <a href="{{ .Site.BaseURL }}agents/" class="btn btn-primary">
                 🔍 Browse Sample Agents
             </a>
-            <a href="/docs/" class="btn btn-secondary">
+            <a href="{{ .Site.BaseURL }}docs/" class="btn btn-secondary">
                 📚 Documentation
             </a>
             <a href="https://github.com/aymenfurter/agent-directory" class="btn btn-secondary" target="_blank" rel="noopener">
@@ -89,7 +89,7 @@
                     <div style="color: var(--text-muted); font-size: 0.875rem;">
                         Protocol v{{ .protocolVersion }}
                     </div>
-                    <a href="/agents/{{ $agentSlug }}/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                    <a href="{{ .Site.BaseURL }}agents/{{ $agentSlug }}/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
                         View Sample →
                     </a>
                 </div>
@@ -98,7 +98,7 @@
         </div>
         
         <div class="text-center mt-4">
-            <a href="/agents/" class="btn btn-primary">
+            <a href="{{ .Site.BaseURL }}agents/" class="btn btn-primary">
                 View All Sample Agents →
             </a>
         </div>
