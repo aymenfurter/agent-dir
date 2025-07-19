@@ -32,6 +32,7 @@
   margin: 0 0 var(--space-4);
   line-height: 1.1;
   letter-spacing: -0.02em;
+  color: white;
 }
 
 .agent-subtitle {
@@ -40,6 +41,7 @@
   margin: 0 0 var(--space-6);
   font-weight: 400;
   line-height: 1.6;
+  color: white;
 }
 
 .agent-meta {
