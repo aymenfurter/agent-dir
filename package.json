@@ -25,7 +25,7 @@
     "static-site",
     "directory"
   ],
-  "author": "A2A Community",
+  "author": "Aymen Furter",
   "license": "MIT",
   "devDependencies": {
     "@netlify/cli": "^17.0.0",
