@@ -7,9 +7,6 @@
     "build": "npm run generate && hugo --minify",
     "clean": "rm -rf public",
     "preview": "hugo server --environment production",
-    "deploy": "npm run build && npm run deploy:netlify",
-    "deploy:netlify": "netlify deploy --prod --dir=public",
-    "deploy:vercel": "vercel --prod",
     "validate": "npm run validate:html && npm run validate:css",
     "validate:html": "html-validate public/**/*.html",
     "validate:css": "stylelint themes/a2a-theme/static/css/**/*.css",
@@ -28,12 +25,15 @@
   "author": "Aymen Furter",
   "license": "MIT",
   "devDependencies": {
-    "@netlify/cli": "^17.0.0",
     "html-validate": "^8.0.0",
     "lighthouse": "^11.0.0",
     "stylelint": "^16.0.0",
-    "stylelint-config-standard": "^36.0.0",
-    "vercel": "^33.0.0"
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
   },
   "engines": {
     "node": ">=18.0.0"
