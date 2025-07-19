@@ -8,10 +8,10 @@
     <meta name="keywords" content="A2A,AI agents,automation,MCP,protocols">
     <meta name="author" content="A2A Community">
     
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link href="/css/main.css" rel="stylesheet">
+    <link rel="icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon">
+    <link href="{{ "css/main.css" | relURL }}" rel="stylesheet">
     {{ if or (eq .Type "agents") (eq .Type "agent") }}
-    <link href="/css/agent-detail.css" rel="stylesheet">
+    <link href="{{ "css/agent-detail.css" | relURL }}" rel="stylesheet">
     {{ end }}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="nav-content">
                 <div class="nav-brand">
-                    <a href="/" class="brand-link">
+                    <a href="{{ .Site.BaseURL }}" class="brand-link">
                         <div class="brand-icon">
                             <i class="fas fa-robot"></i>
                         </div>
@@ -34,9 +34,9 @@
                 </div>
                 
                 <div class="nav-links">
-                    <a href="/" class="nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
-                    <a href="/agents/" class="nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
-                    <a href="/docs/" class="nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
+                    <a href="{{ .Site.BaseURL }}" class="nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
+                    <a href="{{ .Site.BaseURL }}agents/" class="nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
+                    <a href="{{ .Site.BaseURL }}docs/" class="nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
                 </div>
                 
                 <div class="mobile-menu-btn">
@@ -49,9 +49,9 @@
         
         <div id="mobile-menu" class="mobile-menu">
             <div class="mobile-menu-content">
-                <a href="/" class="mobile-nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
-                <a href="/agents/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
-                <a href="/docs/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
+                <a href="{{ .Site.BaseURL }}" class="mobile-nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
+                <a href="{{ .Site.BaseURL }}agents/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
+                <a href="{{ .Site.BaseURL }}docs/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
             </div>
         </div>
     </nav>
@@ -94,7 +94,7 @@
                         <h3>Template</h3>
                         <ul class="footer-links">
                             <li><a href="https://github.com/aymenfurter/agent-directory" target="_blank" rel="noopener">GitHub Repository</a></li>
-                            <li><a href="/docs/">Documentation</a></li>
+                            <li><a href="{{ .Site.BaseURL }}docs/">Documentation</a></li>
                         </ul>
                         <div class="footer-social">
                             <a href="https://github.com/aymenfurter/agent-directory" class="social-link" target="_blank" rel="noopener">
@@ -113,6 +113,6 @@
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <script src="{{ "js/main.js" | relURL }}"></script>
 </body>
 </html>

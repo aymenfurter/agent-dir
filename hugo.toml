@@ -1,4 +1,4 @@
-baseURL = "https://a2a-agents.example.com"
+baseURL = "https://aymenfurter.github.io/agent-directory/"
 languageCode = "en-us"
 title = "Agent Directory"
 theme = "a2a-theme"
