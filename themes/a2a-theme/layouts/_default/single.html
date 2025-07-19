@@ -1,0 +1,417 @@
+{{ define "main" }}
+{{ if or (eq .Type "agent") (and (eq .Section "agents") (ne .Kind "section")) }}
+{{ $currentSlug := .File.BaseFileName }}
+{{ $agent := false }}
+{{ range .Site.Data.agents.agents }}
+  {{ if eq .slug $currentSlug }}
+    {{ $agent = . }}
+  {{ end }}
+{{ end }}
+
+{{ if $agent }}
+<!-- Agent Detail Page -->
+<div class="agent-detail">
+    <!-- Agent Header -->
+    <section class="agent-header">
+        <div class="agent-header-content">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" style="margin-bottom: var(--space-8); opacity: 0.8;">
+                    <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a>
+                    <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
+                    <a href="/agents/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Agents</a>
+                    <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
+                    <span style="color: white;">{{ $agent.name }}</span>
+                </nav>
+
+                <h1 class="agent-title">{{ $agent.name }}</h1>
+                <p class="agent-subtitle">{{ $agent.description }}</p>
+                
+                <div class="agent-meta">
+                    {{ if $agent.tags }}
+                    {{ range first 1 $agent.tags }}
+                    <span class="agent-category-badge">{{ . | title }}</span>
+                    {{ end }}
+                    {{ end }}
+                    
+                    {{ if $agent.tags }}
+                    <div class="agent-tags">
+                        {{ range after 1 $agent.tags }}
+                        <span class="agent-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Content -->
+    <div class="agent-content">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <div class="container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="overview">
+                        <i class="fas fa-info-circle"></i>
+                        Overview
+                    </button>
+                    {{ if $agent.skills }}
+                    <button class="tab-btn" data-tab="skills">
+                        <i class="fas fa-cogs"></i>
+                        Skills
+                    </button>
+                    {{ end }}
+                    <button class="tab-btn" data-tab="integration">
+                        <i class="fas fa-code"></i>
+                        Integration
+                    </button>
+                    <button class="tab-btn" data-tab="config">
+                        <i class="fas fa-sliders-h"></i>
+                        Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="container">
+            <div class="tab-panels">
+                <!-- Overview Tab -->
+                <div class="tab-panel active" id="overview">
+                    <div class="agent-grid">
+                        <!-- Description Card -->
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-info-circle"></i> About This Agent</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>{{ $agent.description }}</p>
+                                {{ if $agent.provider }}
+                                {{ if $agent.provider.description }}
+                                <p>{{ $agent.provider.description }}</p>
+                                {{ end }}
+                                {{ end }}
+                                {{ .Content }}
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-bar"></i> Quick Stats</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <div class="stat-value">{{ len $agent.skills | default "N/A" }}</div>
+                                        <div class="stat-label">Skills Available</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">{{ $agent.protocolVersion | default "1.0" }}</div>
+                                        <div class="stat-label">Protocol Version</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">{{ len $agent.tags }}</div>
+                                        <div class="stat-label">Tags</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">{{ if $agent.capabilities.streaming }}Yes{{ else }}No{{ end }}</div>
+                                        <div class="stat-label">Streaming</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Provider Info -->
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-building"></i> Provider Information</h3>
+                            </div>
+                            <div class="card-content">
+                                {{ if $agent.provider }}
+                                <div class="info-row">
+                                    <span class="info-label">Organization:</span>
+                                    <span class="info-value">{{ $agent.provider.organization | default $agent.provider.name | default "Not specified" }}</span>
+                                </div>
+                                {{ if $agent.provider.url }}
+                                <div class="info-row">
+                                    <span class="info-label">Website:</span>
+                                    <span class="info-value"><a href="{{ $agent.provider.url }}" target="_blank" rel="noopener">{{ $agent.provider.url }}</a></span>
+                                </div>
+                                {{ end }}
+                                <div class="info-row" style="margin-top: var(--space-4);">
+                                    <a href="http://goo.gle/a2a-inspector-app" target="_blank" rel="noopener" class="btn btn-primary" style="margin-right: var(--space-3);">
+                                        <i class="fas fa-play"></i>
+                                        Try Agent
+                                    </a>
+                                    {{ if $agent.provider.url }}
+                                    <a href="{{ $agent.provider.url }}" target="_blank" rel="noopener" class="btn btn-secondary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        Open Documentation
+                                    </a>
+                                    {{ end }}
+                                </div>
+                                {{ else }}
+                                <p>Provider information not available.</p>
+                                {{ end }}
+                            </div>
+                        </div>
+
+                        <!-- Capabilities -->
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-magic"></i> Capabilities</h3>
+                            </div>
+                            <div class="card-content">
+                                {{ if $agent.capabilities }}
+                                <div class="capabilities-grid">
+                                    <div class="capability-item">
+                                        <i class="fas fa-stream{{ if $agent.capabilities.streaming }} text-success{{ else }} text-muted{{ end }}"></i>
+                                        <span>Streaming Support</span>
+                                        {{ if $agent.capabilities.streaming }}<span class="badge badge-success">Enabled</span>{{ else }}<span class="badge badge-secondary">Disabled</span>{{ end }}
+                                    </div>
+                                    <div class="capability-item">
+                                        <i class="fas fa-bell{{ if $agent.capabilities.pushNotifications }} text-success{{ else }} text-muted{{ end }}"></i>
+                                        <span>Push Notifications</span>
+                                        {{ if $agent.capabilities.pushNotifications }}<span class="badge badge-success">Enabled</span>{{ else }}<span class="badge badge-secondary">Disabled</span>{{ end }}
+                                    </div>
+                                    <div class="capability-item">
+                                        <i class="fas fa-history{{ if $agent.capabilities.stateTransitionHistory }} text-success{{ else }} text-muted{{ end }}"></i>
+                                        <span>State History</span>
+                                        {{ if $agent.capabilities.stateTransitionHistory }}<span class="badge badge-success">Enabled</span>{{ else }}<span class="badge badge-secondary">Disabled</span>{{ end }}
+                                    </div>
+                                </div>
+                                {{ else }}
+                                <p>Capability information not available.</p>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Tab -->
+                {{ if $agent.skills }}
+                <div class="tab-panel" id="skills">
+                    <div class="skills-container">
+                        {{ range $agent.skills }}
+                        <div class="skill-card">
+                            <div class="skill-header">
+                                <h3>{{ .name }}</h3>
+                                {{ if .tags }}
+                                <div class="skill-tags">
+                                    {{ range .tags }}
+                                    <span class="skill-tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                            </div>
+                            <div class="skill-content">
+                                <p>{{ .description }}</p>
+                                {{ if .parameters }}
+                                <details class="skill-details">
+                                    <summary>View Parameters</summary>
+                                    <div class="json-config">
+                                        <pre><code class="language-json">{{ .parameters | jsonify (dict "indent" "  ") }}</code></pre>
+                                        <button class="code-copy-btn" onclick="copyCode(this)">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </details>
+                                {{ end }}
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+
+                <!-- Integration Tab -->
+                <div class="tab-panel" id="integration">
+                    <div class="integration-container">
+                        <!-- Language Tabs -->
+                        <div class="language-tabs">
+                            <button class="lang-tab active" data-lang="javascript">
+                                <i class="fab fa-js-square"></i>
+                                JavaScript
+                            </button>
+                            <button class="lang-tab" data-lang="python">
+                                <i class="fab fa-python"></i>
+                                Python
+                            </button>
+                            <button class="lang-tab" data-lang="curl">
+                                <i class="fas fa-terminal"></i>
+                                cURL
+                            </button>
+                        </div>
+
+                        <!-- Code Examples -->
+                        <div class="code-examples">
+                            <div class="code-example active" id="javascript">
+                                <div class="json-config">
+                                    <pre><code class="language-javascript">// Example: Using {{ $agent.name }}
+const response = await fetch('{{ $agent.url }}', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    input: {
+      text: "Your input here"
+    }{{ if $agent.skills }},
+    skill: "{{ (index $agent.skills 0).name }}"{{ end }}
+  })
+});
+
+const result = await response.json();
+console.log('Agent response:', result);</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="code-example" id="python">
+                                <div class="json-config">
+                                    <pre><code class="language-python">import requests
+import json
+
+# Example: Using {{ $agent.name }}
+url = "{{ $agent.url }}"
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer YOUR_API_KEY"
+}
+
+payload = {
+    "input": {
+        "text": "Your input here"
+    }{{ if $agent.skills }},
+    "skill": "{{ (index $agent.skills 0).name }}"{{ end }}
+}
+
+response = requests.post(url, headers=headers, json=payload)
+result = response.json()
+print(f"Agent response: {result}")</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="code-example" id="curl">
+                                <div class="json-config">
+                                    <pre><code class="language-bash">curl -X POST "{{ $agent.url }}" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+    "input": {
+      "text": "Your input here"
+    }{{ if $agent.skills }},
+    "skill": "{{ (index $agent.skills 0).name }}"{{ end }}
+  }'</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuration Tab -->
+                <div class="tab-panel" id="config">
+                    <div class="config-container">
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-download"></i> Agent Configuration</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Use this configuration to add {{ $agent.name }} to your A2A-compatible system:</p>
+                                <div class="json-config">
+                                    <pre><code class="language-json">{{ $agent | jsonify (dict "indent" "  ") }}</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div class="config-actions">
+                                    <button class="btn btn-primary" onclick="downloadConfig('{{ $agent.slug }}')">
+                                        <i class="fas fa-download"></i>
+                                        Download JSON
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="copyConfig('{{ $agent.slug }}')">
+                                        <i class="fas fa-copy"></i>
+                                        Copy to Clipboard
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ if $agent.url }}
+                        <div class="agent-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-link"></i> Endpoint Information</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="info-row">
+                                    <span class="info-label">Agent URL:</span>
+                                    <span class="info-value">
+                                        <code>{{ $agent.url }}</code>
+                                        <button class="btn-icon" onclick="copyToClipboard('{{ $agent.url }}')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Protocol Version:</span>
+                                    <span class="info-value">{{ $agent.protocolVersion | default "1.0.0" }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Agent Version:</span>
+                                    <span class="info-value">{{ $agent.version | default "1.0.0" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ else }}
+<!-- Fallback to markdown content if agent data not found -->
+<div class="docs-page">
+    <div class="container">
+        <div class="docs-header">
+            <h1>{{ .Title }}</h1>
+            {{ if .Description }}
+            <p>{{ .Description }}</p>
+            {{ end }}
+        </div>
+        
+        <div class="docs-content">
+            {{ .Content }}
+        </div>
+    </div>
+</div>
+{{ end }}
+{{ else }}
+<!-- Default layout for non-agent pages -->
+<div class="docs-page">
+    <div class="container">
+        <div class="docs-header">
+            <h1>{{ .Title }}</h1>
+            {{ if .Description }}
+            <p>{{ .Description }}</p>
+            {{ end }}
+        </div>
+        
+        <div class="docs-content">
+            {{ .Content }}
+        </div>
+    </div>
+</div>
+{{ end }}
+{{ end }}

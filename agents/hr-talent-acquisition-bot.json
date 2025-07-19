@@ -1,0 +1,57 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "HR Talent Acquisition Bot",
+  "description": "Automates candidate screening, interview scheduling, and talent pipeline management for HR teams",
+  "url": "https://hr.contoso.com/a2a",
+  "version": "2.1.0",
+  "provider": {
+    "organization": "Contoso Corporation",
+    "url": "https://contoso.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "screenCandidate",
+      "name": "screenCandidate",
+      "description": "Analyzes resumes and conducts initial candidate screening based on job requirements",
+      "tags": [
+        "hr",
+        "recruitment",
+        "screening",
+        "automation"
+      ],
+      "examples": [
+        "Screen software engineer candidates",
+        "Evaluate marketing manager applications",
+        "Filter candidates by experience level"
+      ]
+    },
+    {
+      "id": "scheduleInterview",
+      "name": "scheduleInterview",
+      "description": "Automatically schedules interviews with candidates and hiring managers",
+      "tags": [
+        "hr",
+        "scheduling",
+        "interviews",
+        "automation"
+      ],
+      "examples": [
+        "Schedule technical interview for next week",
+        "Book panel interview with multiple interviewers",
+        "Reschedule cancelled interview"
+      ]
+    }
+  ]
+}

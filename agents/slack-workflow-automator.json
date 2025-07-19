@@ -1,0 +1,75 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Slack Workflow Automator",
+  "description": "AI agent that automates Slack workflows, manages channels, and provides intelligent notifications",
+  "url": "https://slack-automator.example.com/a2a",
+  "version": "1.3.2",
+  "provider": {
+    "organization": "Slack Automation Team",
+    "url": "https://example.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "sendChannelMessage",
+      "name": "sendChannelMessage",
+      "description": "Sends formatted messages to Slack channels with rich formatting and attachments",
+      "tags": [
+        "slack",
+        "automation",
+        "workflow",
+        "notifications",
+        "collaboration"
+      ],
+      "examples": [
+        "Example usage of sendChannelMessage",
+        "How to use sendChannelMessage skill",
+        "sendChannelMessage demonstration"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "createWorkflow",
+      "name": "createWorkflow",
+      "description": "Creates automated Slack workflows based on triggers and conditions",
+      "tags": [
+        "slack",
+        "automation",
+        "workflow",
+        "notifications",
+        "collaboration"
+      ],
+      "examples": [
+        "Example usage of createWorkflow",
+        "How to use createWorkflow skill",
+        "createWorkflow demonstration"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    }
+  ]
+}

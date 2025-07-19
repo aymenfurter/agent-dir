@@ -1,0 +1,57 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Outlook Email Organizer",
+  "description": "Automatically categorizes, prioritizes, and manages Outlook emails with intelligent sorting and response suggestions",
+  "url": "https://email.adventure-works.com/a2a",
+  "version": "2.3.1",
+  "provider": {
+    "organization": "Adventure Works Cycles",
+    "url": "https://adventure-works.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "categorizeEmails",
+      "name": "categorizeEmails",
+      "description": "Automatically categorizes incoming emails based on content and sender patterns",
+      "tags": [
+        "email",
+        "organization",
+        "categorization",
+        "automation"
+      ],
+      "examples": [
+        "Categorize project updates",
+        "Sort customer inquiries",
+        "Filter promotional emails"
+      ]
+    },
+    {
+      "id": "suggestResponses",
+      "name": "suggestResponses",
+      "description": "Generates contextual response suggestions for emails based on content analysis",
+      "tags": [
+        "email",
+        "responses",
+        "automation",
+        "suggestions"
+      ],
+      "examples": [
+        "Suggest meeting confirmation response",
+        "Generate follow-up email draft",
+        "Create status update reply"
+      ]
+    }
+  ]
+}

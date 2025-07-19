@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}Agent Directory</title>
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}Discover and explore A2A-compatible AI agents{{ end }}">
+    <meta name="keywords" content="A2A,AI agents,automation,MCP,protocols">
+    <meta name="author" content="A2A Community">
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="/css/main.css" rel="stylesheet">
+    {{ if or (eq .Type "agents") (eq .Type "agent") }}
+    <link href="/css/agent-detail.css" rel="stylesheet">
+    {{ end }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body{{ if or (eq .Type "agents") (eq .Type "agent") }} class="agent-detail-page"{{ end }}>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <a href="/" class="brand-link">
+                        <div class="brand-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="brand-text">Agent Directory</span>
+                    </a>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/" class="nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
+                    <a href="/agents/" class="nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
+                    <a href="/docs/" class="nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
+                </div>
+                
+                <div class="mobile-menu-btn">
+                    <button id="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-menu-content">
+                <a href="/" class="mobile-nav-link{{ if eq .RelPermalink "/" }} active{{ end }}">Home</a>
+                <a href="/agents/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/agents/" }} active{{ end }}">Agents</a>
+                <a href="/docs/" class="mobile-nav-link{{ if hasPrefix .RelPermalink "/docs/" }} active{{ end }}">Documentation</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>Agent Directory Template</h3>
+                        <p>A Git-based template for documenting A2A-compatible agents. This is a sample implementation, not affiliated with the official A2A protocol.</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>A2A Protocol Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="https://a2a-protocol.org/latest/topics/what-is-a2a/" target="_blank" rel="noopener">What is A2A?</a></li>
+                            <li><a href="https://a2a-protocol.org/latest/specification/" target="_blank" rel="noopener">Protocol Specification</a></li>
+                            <li><a href="https://a2a-protocol.org/latest/tutorials/python/1-introduction/" target="_blank" rel="noopener">Getting Started</a></li>
+                            <li><a href="https://a2a-protocol.org/latest/community/" target="_blank" rel="noopener">Community</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>SDK & Tools</h3>
+                        <ul class="footer-links">
+                            <li><a href="https://github.com/a2aproject/a2a-python" target="_blank" rel="noopener">Python SDK</a></li>
+                            <li><a href="https://github.com/a2aproject/a2a-js" target="_blank" rel="noopener">JavaScript SDK</a></li>
+                            <li><a href="https://github.com/a2aproject/a2a-java" target="_blank" rel="noopener">Java SDK</a></li>
+                            <li><a href="https://github.com/a2aproject/a2a-samples" target="_blank" rel="noopener">Code Samples</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Template</h3>
+                        <ul class="footer-links">
+                            <li><a href="https://github.com/aymenfurter/agent-directory" target="_blank" rel="noopener">GitHub Repository</a></li>
+                            <li><a href="/docs/">Documentation</a></li>
+                        </ul>
+                        <div class="footer-social">
+                            <a href="https://github.com/aymenfurter/agent-directory" class="social-link" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-copyright">
+                        © 2024 Agent Directory Template. Open source project. Not affiliated with the official A2A protocol.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

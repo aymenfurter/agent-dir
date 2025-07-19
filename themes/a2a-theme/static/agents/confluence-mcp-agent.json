@@ -1,0 +1,54 @@
+{
+  "name": "Confluence MCP Agent",
+  "description": "AI agent for Confluence documentation using MCP tools.",
+  "version": "1.0.0",
+  "protocolVersion": "0.2.5",
+  "url": "https://confluence-mcp.example.com/a2a",
+  "capabilities": {
+    "streaming": false
+  },
+  "defaultInputModes": ["text"],
+  "defaultOutputModes": ["text"],
+  "skills": [
+    {
+      "name": "lookupConfluencePage",
+      "description": "Searches and retrieves Confluence page content.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" }
+        },
+        "required": ["query"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "pageTitle": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "summarizeContent",
+      "description": "Summarizes long documentation content.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string" }
+        },
+        "required": ["text"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "summary": { "type": "string" }
+        }
+      }
+    }
+  ],
+  "contact": {
+    "name": "Aimen Furter",
+    "email": "aimen@example.com"
+  },
+  "tags": ["documentation", "confluence", "summarization"]
+}

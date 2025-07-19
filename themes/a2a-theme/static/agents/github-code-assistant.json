@@ -1,0 +1,60 @@
+{
+  "name": "GitHub Code Assistant",
+  "description": "AI agent that helps with GitHub repository management, code review, and issue tracking",
+  "url": "https://github-assistant.example.com/a2a",
+  "version": "2.1.0",
+  "protocolVersion": "0.2.5",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true
+  },
+  "defaultInputModes": ["text", "application/json"],
+  "defaultOutputModes": ["text", "application/json", "text/markdown"],
+  "skills": [
+    {
+      "name": "analyzeRepository",
+      "description": "Analyzes a GitHub repository for code quality, security vulnerabilities, and improvement suggestions",
+      "input": {
+        "type": "object",
+        "properties": {
+          "repository_url": { "type": "string" },
+          "analysis_type": { "type": "string", "enum": ["security", "quality", "performance", "all"] }
+        },
+        "required": ["repository_url"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "score": { "type": "number" },
+          "issues": { "type": "array" },
+          "recommendations": { "type": "array" }
+        }
+      }
+    },
+    {
+      "name": "createIssue",
+      "description": "Creates GitHub issues with proper formatting and labels",
+      "input": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "labels": { "type": "array" }
+        },
+        "required": ["title", "description"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "issue_url": { "type": "string" },
+          "issue_number": { "type": "number" }
+        }
+      }
+    }
+  ],
+  "contact": {
+    "name": "DevTools Team",
+    "email": "devtools@example.com"
+  },
+  "tags": ["github", "code-review", "repository", "development", "ci-cd"]
+}

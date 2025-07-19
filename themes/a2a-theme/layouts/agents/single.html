@@ -1,0 +1,450 @@
+{{ define "main" }}
+{{ $currentSlug := .File.BaseFileName }}
+{{ $agent := false }}
+{{ range .Site.Data.agents.agents }}
+  {{ if eq .slug $currentSlug }}
+    {{ $agent = . }}
+  {{ end }}
+{{ end }}
+
+{{ if $agent }}
+<!-- Agent Detail Page -->
+<div class="agent-detail">
+    <!-- Agent Header -->
+    <section class="agent-header">
+        <div class="agent-header-content">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" style="margin-bottom: var(--space-8); opacity: 0.8;">
+                    <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a>
+                    <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
+                    <a href="/agents/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Agents</a>
+                    <span style="margin: 0 var(--space-2); opacity: 0.6;">/</span>
+                    <span style="color: white;">{{ $agent.name }}</span>
+                </nav>
+
+                <h1 class="agent-title">{{ $agent.name }}</h1>
+                <p class="agent-subtitle">{{ $agent.description }}</p>
+                
+                <div class="agent-meta">
+                    {{ if $agent.tags }}
+                    {{ range first 1 $agent.tags }}
+                    <span class="agent-category-badge">{{ . | title }}</span>
+                    {{ end }}
+                    {{ end }}
+                    
+                    {{ if $agent.tags }}
+                    <div class="agent-tags">
+                        {{ range after 1 $agent.tags }}
+                        <span class="agent-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Content -->
+    <div class="agent-content">
+        <!-- Main Content -->
+        <div class="agent-main">
+            <!-- Navigation Tabs -->
+            <div class="agent-tabs">
+                {{ if $agent.skills }}
+                <button class="tab-button active" onclick="openTab(event, 'skills')">
+                    <i class="fas fa-tools"></i>
+                    Skills ({{ len $agent.skills }})
+                </button>
+                <button class="tab-button" onclick="openTab(event, 'integration')">
+                    <i class="fas fa-code"></i>
+                    Integration
+                </button>
+                {{ else }}
+                <button class="tab-button active" onclick="openTab(event, 'integration')">
+                    <i class="fas fa-code"></i>
+                    Integration
+                </button>
+                {{ end }}
+                <button class="tab-button" onclick="openTab(event, 'configuration')">
+                    <i class="fas fa-cog"></i>
+                    Configuration
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Skills Tab -->
+                {{ if $agent.skills }}
+                <div id="skills" class="tab-pane active">
+                    <section class="agent-config">
+                        <h2>Available Skills</h2>
+                        <div class="skills-container">
+                            {{ range $index, $skill := $agent.skills }}
+                            <div class="skill-card">
+                                <div class="skill-header">
+                                    <h3>{{ .name }}</h3>
+                                    <span class="skill-number">#{{ add $index 1 }}</span>
+                                </div>
+                                <p class="skill-description">{{ .description }}</p>
+                                
+                                {{ if .tags }}
+                                <div class="skill-tags">
+                                    {{ range .tags }}
+                                    <span class="skill-tag">{{ . }}</span>
+                                    {{ end }}
+                                </div>
+                                {{ end }}
+                                
+                                {{ if .parameters }}
+                                <details class="skill-details">
+                                    <summary>View Parameters</summary>
+                                    <div class="json-config">
+                                        <pre><code class="language-json">{{ .parameters | jsonify (dict "indent" "  ") }}</code></pre>
+                                        <button class="code-copy-btn" onclick="copyCode(this)">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </details>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Integration Tab -->
+                <div id="integration" class="tab-pane">
+                {{ else }}
+                <!-- Integration Tab -->
+                <div id="integration" class="tab-pane active">
+                {{ end }}
+                    <section class="agent-config">
+                        <h2>Integration Examples</h2>
+                        
+                        <div class="language-tabs">
+                            <button class="lang-tab active" onclick="openLangTab(event, 'java')">Java</button>
+                            <button class="lang-tab" onclick="openLangTab(event, 'python')">Python</button>
+                        </div>
+                        
+                        <div class="lang-content">
+                            <div id="java" class="lang-pane active">
+                                <div class="json-config">
+                                    <pre><code class="language-java">// A2A Java Client Example
+// Source: https://github.com/a2aproject/a2a-samples/tree/main/samples/java/client
+
+import com.google.a2a.client.*;
+import com.google.a2a.model.*;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class AgentClientExample {
+    public static void main(String[] args) {
+        // Create client pointing to your agent
+        A2AClient client = new A2AClient("{{ $agent.url }}");
+        
+        try {
+            // Get agent card
+            System.out.println("=== Getting Agent Card ===");
+            AgentCard agentCard = client.getAgentCard();
+            System.out.println("Agent: " + agentCard.name());
+            System.out.println("Description: " + agentCard.description());
+            System.out.println("Version: " + agentCard.version());
+            System.out.println("Skills: " + agentCard.skills());
+            
+            // Send a task to the agent{{ if $agent.skills }}
+            TextPart textPart = new TextPart("Your input text here", null);
+            
+            Message message = new Message(
+                UUID.randomUUID().toString(),  // messageId
+                "message",                     // kind
+                "user",                        // role
+                List.of(textPart),            // parts
+                null, null, null, null        // contextId, taskId, etc.
+            );
+            
+            TaskSendParams params = new TaskSendParams(
+                "{{ (index $agent.skills 0).name }}-task",
+                null,  // sessionId
+                message,
+                null,  // pushNotification
+                null,  // historyLength
+                Map.of()  // metadata
+            );
+            
+            JSONRPCResponse response = client.sendTask(params);
+            Task task = (Task) response.result();
+            System.out.println("Task ID: " + task.id());
+            System.out.println("Status: " + task.status().state());{{ end }}
+            
+        } catch (A2AClientException e) {
+            System.err.println("A2A Client Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <p style="margin-top: var(--space-4); font-size: 0.875rem; color: var(--text-muted);">
+                                    <i class="fab fa-github"></i> 
+                                    <a href="https://github.com/a2aproject/a2a-samples/tree/main/samples/java/client" target="_blank" rel="noopener">View full Java examples on GitHub</a>
+                                </p>
+                            </div>
+                            
+                            <div id="python" class="lang-pane">
+                                <div class="json-config">
+                                    <pre><code class="language-python"># A2A Python Client Example
+# Source: https://github.com/a2aproject/a2a-samples/tree/main/samples/python
+
+import asyncio
+import httpx
+from uuid import uuid4
+from a2a.client import A2ACardResolver, A2AClient
+from a2a.types import (
+    AgentCard,
+    Message,
+    MessageSendParams,
+    Part,
+    Role,
+    SendStreamingMessageRequest,
+    TextPart,
+)
+
+class AgentClient:
+    def __init__(self, agent_url: str):
+        self.agent_url = agent_url
+    
+    async def get_agent_card(self) -> AgentCard:
+        """Get the agent card information."""
+        async with httpx.AsyncClient() as httpx_client:
+            card_resolver = A2ACardResolver(httpx_client, self.agent_url)
+            return await card_resolver.get_agent_card()
+    
+    async def send_message(self, message_text: str):
+        """Send a message to the agent and get streaming response."""
+        async with httpx.AsyncClient() as httpx_client:
+            # Get agent card first
+            agent_card = await self.get_agent_card()
+            client = A2AClient(httpx_client, agent_card=agent_card)
+            
+            # Create message
+            message = MessageSendParams(
+                message=Message(
+                    role=Role.user,
+                    parts=[Part(TextPart(text=message_text))],
+                    messageId=uuid4().hex,
+                    taskId=uuid4().hex,
+                )
+            )
+            
+            # Send streaming message
+            streaming_request = SendStreamingMessageRequest(
+                id=str(uuid4().hex),
+                params=message
+            )
+            
+            async for chunk in client.send_message_streaming(streaming_request):
+                if hasattr(chunk.root, 'result') and hasattr(chunk.root.result, 'status'):
+                    message = chunk.root.result.status.message
+                    if message and message.parts:
+                        yield message.parts[0].root.text
+
+async def main():
+    """Example usage of the agent client."""
+    client = AgentClient("{{ $agent.url }}")
+    
+    # Get agent information
+    agent_card = await client.get_agent_card()
+    print(f"Agent: {agent_card.name}")
+    print(f"Description: {agent_card.description}")
+    
+    # Send a message and stream the response
+    async for response_chunk in client.send_message("Your input text here"):
+        print(response_chunk, end='', flush=True)
+
+if __name__ == '__main__':
+    asyncio.run(main())</code></pre>
+                                    <button class="code-copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <p style="margin-top: var(--space-4); font-size: 0.875rem; color: var(--text-muted);">
+                                    <i class="fab fa-github"></i> 
+                                    <a href="https://github.com/a2aproject/a2a-samples/tree/main/samples/python" target="_blank" rel="noopener">View full Python examples on GitHub</a>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Configuration Tab -->
+                <div id="configuration" class="tab-pane">
+                    <section class="agent-config">
+                        <h2>Agent Configuration</h2>
+                        <p>Complete JSON configuration for this agent:</p>
+                        <div class="json-config">
+                            <pre><code class="language-json">{{ $agent | jsonify (dict "indent" "  ") }}</code></pre>
+                            <button class="code-copy-btn" onclick="copyCode(this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="agent-sidebar">
+            <!-- Agent Info Card -->
+            <div class="agent-info-card">
+                <h3 class="agent-info-title">Agent Details</h3>
+                
+                <div class="agent-info-grid">
+                    <div class="agent-info-item">
+                        <span class="agent-info-label">Version</span>
+                        <span class="agent-info-value">v{{ $agent.version }}</span>
+                    </div>
+                    
+                    <div class="agent-info-item">
+                        <span class="agent-info-label">Protocol</span>
+                        <span class="agent-info-value">A2A {{ $agent.protocolVersion }}</span>
+                    </div>
+                    
+                    {{ if $agent.provider }}
+                    <div class="agent-info-item">
+                        <span class="agent-info-label">Provider</span>
+                        <span class="agent-info-value">{{ $agent.provider.organization }}</span>
+                    </div>
+                    {{ end }}
+                    
+                    {{ if $agent.capabilities }}
+                    <div class="agent-info-item">
+                        <span class="agent-info-label">Capabilities</span>
+                        <div class="agent-info-value">
+                            {{ range $cap, $enabled := $agent.capabilities }}
+                            {{ if $enabled }}
+                            <span class="badge" style="margin-right: var(--space-2); margin-bottom: var(--space-1); display: inline-block;">{{ $cap | humanize }}</span>
+                            {{ end }}
+                            {{ end }}
+                        </div>
+                    </div>
+                    {{ end }}
+                    
+                    {{ if $agent.skills }}
+                    <div class="agent-info-item">
+                        <span class="agent-info-label">Skills Count</span>
+                        <span class="agent-info-value">{{ len $agent.skills }} available</span>
+                    </div>
+                    {{ end }}
+                </div>
+                
+                <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--border);">
+                    {{ if $agent.provider.url }}
+                    <a href="{{ $agent.provider.url }}" target="_blank" class="download-button" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open Documentation
+                    </a>
+                    {{ end }}
+                    
+                    <button onclick="copyAgentUrl('{{ $agent.url }}')" class="download-button" style="width: 100%; justify-content: center; margin-top: var(--space-3); background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border);">
+                        <i class="fas fa-copy"></i>
+                        Copy Agent URL
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ else }}
+<!-- Agent Not Found -->
+<div class="container" style="padding: var(--space-16) var(--space-4); text-align: center;">
+    <i class="fas fa-robot" style="font-size: 4rem; color: var(--text-muted); margin-bottom: var(--space-6);"></i>
+    <h1 style="margin-bottom: var(--space-4);">Agent Not Found</h1>
+    <p style="margin-bottom: var(--space-8); color: var(--text-muted);">The agent you're looking for doesn't exist or has been removed.</p>
+    <a href="/agents/" class="btn btn-primary">Browse All Agents</a>
+</div>
+{{ end }}
+
+<script>
+// Tab functionality
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-pane");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+    }
+    tablinks = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+// Language tab functionality
+function openLangTab(evt, langName) {
+    var i, langcontent, langlinks;
+    langcontent = document.getElementsByClassName("lang-pane");
+    for (i = 0; i < langcontent.length; i++) {
+        langcontent[i].classList.remove("active");
+    }
+    langlinks = document.getElementsByClassName("lang-tab");
+    for (i = 0; i < langlinks.length; i++) {
+        langlinks[i].classList.remove("active");
+    }
+    document.getElementById(langName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+
+// Copy code functionality
+function copyCode(button) {
+    const codeBlock = button.parentElement.querySelector('code');
+    const text = codeBlock.textContent;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        const originalIcon = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.style.color = '#10b981';
+        
+        setTimeout(() => {
+            button.innerHTML = originalIcon;
+            button.style.color = '';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+
+// Copy agent URL functionality
+function copyAgentUrl(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        // Show a simple notification
+        const notification = document.createElement('div');
+        notification.textContent = 'Agent URL copied to clipboard!';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius-lg);
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>
+
+{{ end }}

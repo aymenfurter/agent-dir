@@ -1,0 +1,91 @@
+{
+  "name": "Email Marketing Agent",
+  "description": "AI agent for creating, managing, and optimizing email marketing campaigns with personalization and analytics",
+  "url": "https://email-marketing.example.com/a2a",
+  "version": "3.1.2",
+  "protocolVersion": "0.2.5",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/html"],
+  "skills": [
+    {
+      "name": "createCampaign",
+      "description": "Create a new email marketing campaign with personalized content and targeting",
+      "input": {
+        "type": "object",
+        "properties": {
+          "campaignName": { "type": "string" },
+          "subject": { "type": "string" },
+          "content": { "type": "string" },
+          "audienceSegment": { "type": "string" },
+          "scheduleTime": { "type": "string", "format": "date-time" },
+          "personalization": { "type": "boolean", "default": true }
+        },
+        "required": ["campaignName", "subject", "content", "audienceSegment"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "campaignId": { "type": "string" },
+          "status": { "type": "string" },
+          "estimatedReach": { "type": "number" },
+          "scheduledTime": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "analyzePerformance",
+      "description": "Analyze email campaign performance and provide optimization recommendations",
+      "input": {
+        "type": "object",
+        "properties": {
+          "campaignId": { "type": "string" },
+          "metrics": { "type": "array", "items": { "type": "string" } },
+          "timeRange": { "type": "string", "enum": ["24h", "7d", "30d", "90d"] }
+        },
+        "required": ["campaignId"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "openRate": { "type": "number" },
+          "clickRate": { "type": "number" },
+          "conversionRate": { "type": "number" },
+          "unsubscribeRate": { "type": "number" },
+          "recommendations": { "type": "array" },
+          "insights": { "type": "array" }
+        }
+      }
+    },
+    {
+      "name": "optimizeSubjectLine",
+      "description": "Generate and test optimized subject lines using AI and A/B testing",
+      "input": {
+        "type": "object",
+        "properties": {
+          "originalSubject": { "type": "string" },
+          "audience": { "type": "string" },
+          "campaignGoal": { "type": "string", "enum": ["awareness", "conversion", "engagement"] },
+          "variations": { "type": "number", "minimum": 2, "maximum": 5, "default": 3 }
+        },
+        "required": ["originalSubject", "audience", "campaignGoal"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "optimizedSubjects": { "type": "array" },
+          "predictions": { "type": "array" },
+          "testingStrategy": { "type": "object" }
+        }
+      }
+    }
+  ],
+  "contact": {
+    "name": "Marketing Automation Team",
+    "email": "marketing@emailpro.com"
+  },
+  "tags": ["email", "marketing", "campaigns", "automation", "analytics", "personalization"]
+}

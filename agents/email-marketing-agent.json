@@ -1,0 +1,79 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Email Marketing Agent",
+  "description": "AI agent for creating, managing, and optimizing email marketing campaigns with personalization and analytics",
+  "url": "https://email-marketing.example.com/a2a",
+  "version": "3.1.2",
+  "provider": {
+    "organization": "Marketing Automation Team",
+    "url": "https://example.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/html"
+  ],
+  "skills": [
+    {
+      "id": "createCampaign",
+      "name": "createCampaign",
+      "description": "Create a new email marketing campaign with personalized content and targeting",
+      "tags": [
+        "email",
+        "marketing",
+        "campaigns",
+        "automation",
+        "analytics",
+        "personalization"
+      ],
+      "examples": [
+        "Example usage of createCampaign",
+        "How to use createCampaign skill",
+        "createCampaign demonstration"
+      ]
+    },
+    {
+      "id": "analyzePerformance",
+      "name": "analyzePerformance",
+      "description": "Analyze email campaign performance and provide optimization recommendations",
+      "tags": [
+        "email",
+        "marketing",
+        "campaigns",
+        "automation",
+        "analytics",
+        "personalization"
+      ],
+      "examples": [
+        "Example usage of analyzePerformance",
+        "How to use analyzePerformance skill",
+        "analyzePerformance demonstration"
+      ]
+    },
+    {
+      "id": "optimizeSubjectLine",
+      "name": "optimizeSubjectLine",
+      "description": "Generate and test optimized subject lines using AI and A/B testing",
+      "tags": [
+        "email",
+        "marketing",
+        "campaigns",
+        "automation",
+        "analytics",
+        "personalization"
+      ],
+      "examples": [
+        "Example usage of optimizeSubjectLine",
+        "How to use optimizeSubjectLine skill",
+        "optimizeSubjectLine demonstration"
+      ]
+    }
+  ]
+}

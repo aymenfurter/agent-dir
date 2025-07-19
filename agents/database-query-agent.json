@@ -1,0 +1,60 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Database Query Agent",
+  "description": "AI agent that executes database queries, performs data analysis, and generates reports from various database systems",
+  "url": "https://db-agent.example.com/a2a",
+  "version": "1.5.0",
+  "provider": {
+    "organization": "Data Engineering Team",
+    "url": "https://example.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/csv",
+    "application/pdf"
+  ],
+  "skills": [
+    {
+      "id": "executeQuery",
+      "name": "executeQuery",
+      "description": "Execute SQL queries on connected databases with safety checks and result formatting",
+      "tags": [
+        "database",
+        "sql",
+        "analytics",
+        "reporting",
+        "data"
+      ],
+      "examples": [
+        "Example usage of executeQuery",
+        "How to use executeQuery skill",
+        "executeQuery demonstration"
+      ]
+    },
+    {
+      "id": "generateReport",
+      "name": "generateReport",
+      "description": "Generate formatted reports from database data with charts and visualizations",
+      "tags": [
+        "database",
+        "sql",
+        "analytics",
+        "reporting",
+        "data"
+      ],
+      "examples": [
+        "Example usage of generateReport",
+        "How to use generateReport skill",
+        "generateReport demonstration"
+      ]
+    }
+  ]
+}

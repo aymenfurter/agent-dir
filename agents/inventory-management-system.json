@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Inventory Management System",
+  "description": "Smart inventory management agent that tracks stock levels, predicts demand, and automates reordering processes",
+  "url": "https://inventory.tailspin.com/a2a",
+  "version": "1.6.8",
+  "provider": {
+    "organization": "Tailspin Toys",
+    "url": "https://tailspin.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json", "text/csv"],
+  "defaultOutputModes": ["application/json", "text/csv"],
+  "skills": [
+    {
+      "id": "trackInventory",
+      "name": "trackInventory",
+      "description": "Monitors real-time inventory levels and provides stock status updates",
+      "tags": ["inventory", "tracking", "stock", "monitoring"],
+      "examples": [
+        "Check current stock levels for all products",
+        "Monitor warehouse inventory in real-time",
+        "Track product movement and usage patterns"
+      ]
+    },
+    {
+      "id": "predictDemand",
+      "name": "predictDemand",
+      "description": "Uses AI to forecast future demand based on historical data and market trends",
+      "tags": ["inventory", "forecasting", "demand", "analytics"],
+      "examples": [
+        "Predict next quarter's demand for seasonal items",
+        "Forecast inventory needs for product launch",
+        "Analyze demand patterns for holiday shopping"
+      ]
+    }
+  ]
+}

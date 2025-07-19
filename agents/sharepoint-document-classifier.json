@@ -1,0 +1,63 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "SharePoint Document Classifier",
+  "description": "Automatically classifies and organizes SharePoint documents using AI-powered content analysis and metadata extraction",
+  "url": "https://sharepoint-classifier.fabrikam.com/a2a",
+  "version": "2.1.0",
+  "provider": {
+    "organization": "Fabrikam Inc",
+    "url": "https://fabrikam.com"
+  },
+  "iconUrl": "https://sharepoint-classifier.fabrikam.com/icon.png",
+  "documentationUrl": "https://sharepoint-classifier.fabrikam.com/docs",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "oAuth2": {
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://login.microsoftonline.com/authorize",
+          "tokenUrl": "https://login.microsoftonline.com/token"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oAuth2": []
+    }
+  ],
+  "defaultInputModes": ["application/json", "multipart/form-data"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "classifyDocument",
+      "name": "classifyDocument",
+      "description": "Analyzes document content and automatically assigns appropriate categories and tags",
+      "tags": ["sharepoint", "classification", "documents", "ai"],
+      "examples": [
+        "Classify uploaded contract documents",
+        "Categorize project documentation",
+        "Auto-tag financial reports"
+      ],
+      "inputModes": ["application/json", "multipart/form-data"],
+      "outputModes": ["application/json", "text/plain"]
+    },
+    {
+      "id": "extractMetadata",
+      "name": "extractMetadata",
+      "description": "Extracts relevant metadata from documents for enhanced searchability and organization",
+      "tags": ["sharepoint", "metadata", "extraction", "search"],
+      "examples": [
+        "Extract metadata from PDF reports",
+        "Analyze document properties and content",
+        "Generate searchable tags for documents"
+      ],
+      "inputModes": ["application/json", "multipart/form-data"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}

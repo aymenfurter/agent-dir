@@ -1,0 +1,28 @@
+baseURL = "https://a2a-agents.example.com"
+languageCode = "en-us"
+title = "Agent Directory"
+theme = "a2a-theme"
+
+[params]
+  description = "Discover and explore Agent-to-Agent (A2A) compatible AI agents"
+  keywords = "A2A, AI agents, automation, MCP, protocols"
+  author = "A2A Community"
+  
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "Agents"
+    url = "/agents/"
+    weight = 20
+  [[menu.main]]
+    name = "Documentation"
+    url = "/docs/"
+    weight = 30

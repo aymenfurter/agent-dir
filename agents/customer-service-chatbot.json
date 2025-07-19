@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Customer Service Chatbot",
+  "description": "Intelligent customer service assistant that handles inquiries, processes requests, and provides 24/7 support",
+  "url": "https://chatbot.wingtip.com/a2a",
+  "version": "2.4.1",
+  "provider": {
+    "organization": "Wingtip Toys",
+    "url": "https://wingtip.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "skills": [
+    {
+      "id": "handleInquiry",
+      "name": "handleInquiry",
+      "description": "Processes customer inquiries and provides accurate responses with contextual understanding",
+      "tags": ["customer-service", "inquiry", "support", "chat"],
+      "examples": [
+        "Answer product availability questions",
+        "Handle billing and payment inquiries",
+        "Provide order status information"
+      ]
+    },
+    {
+      "id": "escalateIssue",
+      "name": "escalateIssue",
+      "description": "Intelligently escalates complex issues to appropriate human agents with context preservation",
+      "tags": ["customer-service", "escalation", "support", "routing"],
+      "examples": [
+        "Escalate technical issues to specialist",
+        "Route billing disputes to finance team",
+        "Transfer complex cases to senior support"
+      ]
+    }
+  ]
+}

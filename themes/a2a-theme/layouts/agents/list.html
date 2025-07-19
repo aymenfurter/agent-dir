@@ -1,0 +1,120 @@
+{{ define "main" }}
+        <!-- Header Section -->
+        <div class="page-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1>Sample Agent Directory</h1>
+                        <p>Explore sample A2A-compatible agent configurations included with this template</p>
+                        <p style="font-size: 0.9em; opacity: 0.8;"><em>Replace these with your own agents to create your internal directory</em></p>
+                    </div>
+                    
+                    <div class="header-controls">
+                        <div class="search-box">
+                            <input type="text" id="search-input" placeholder="Search agents..." class="search-input">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        
+                        <select id="category-filter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="documentation">Documentation</option>
+                            <option value="finance">Finance</option>
+                            <option value="development">Development</option>
+                            <option value="automation">Automation</option>
+                            <option value="collaboration">Collaboration</option>
+                        </select>
+                        
+                        <select id="capabilities-filter" class="filter-select">
+                            <option value="">All Capabilities</option>
+                            <option value="streaming">Streaming</option>
+                            <option value="pushNotifications">Push Notifications</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agents Section -->
+        <section class="agents-section">
+            <div class="container">
+                <div class="agents-controls">
+                    <div class="results-info">
+                        <span id="agent-count">{{ len .Site.Data.agents.agents }}</span> agents found
+                    </div>
+                    
+                    <div class="sort-controls">
+                        <span>Sort by:</span>
+                        <select id="sort-select" class="sort-select">
+                            <option value="name">Name</option>
+                            <option value="version">Version</option>
+                            <option value="skills">Skills Count</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="agents-grid" class="agents-grid">
+                    {{ range .Site.Data.agents.agents }}
+                    {{ $agentSlug := .slug }}
+                    <div class="agent-card" 
+                         data-name="{{ lower .name }}" 
+                         data-tags="{{ if .tags }}{{ delimit .tags "," }}{{ end }}" 
+                         data-capabilities="{{ range $cap, $enabled := .capabilities }}{{ if $enabled }}{{ $cap }},{{ end }}{{ end }}" 
+                         data-skills="{{ len .skills }}" 
+                         data-version="{{ .version }}">
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0; flex: 1;">{{ .name }}</h3>
+                            <span class="agent-version">v{{ .version }}</span>
+                        </div>
+                        
+                        <p class="agent-description line-clamp-3">{{ .description }}</p>
+                        
+                        <div class="capabilities">
+                            {{ if .capabilities.streaming }}
+                            <span class="capability supported">🚀 Streaming</span>
+                            {{ end }}
+                            {{ if .capabilities.pushNotifications }}
+                            <span class="capability supported">🔔 Push Notifications</span>
+                            {{ end }}
+                            {{ if .capabilities.stateTransitionHistory }}
+                            <span class="capability supported">📝 State History</span>
+                            {{ end }}
+                        </div>
+                        
+                        {{ if .skills }}
+                        <div class="skills">
+                            <div class="skills-title">Skills ({{ len .skills }})</div>
+                            <div class="skills-list">
+                                {{ range first 3 .skills }}
+                                • {{ .name }}<br>
+                                {{ end }}
+                                {{ if gt (len .skills) 3 }}
+                                <em>... and {{ sub (len .skills) 3 }} more</em>
+                                {{ end }}
+                            </div>
+                        </div>
+                        {{ end }}
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem;">
+                            <div style="color: var(--text-muted); font-size: 0.875rem;">
+                                Protocol v{{ .protocolVersion }}
+                            </div>
+                            <a href="/agents/{{ $agentSlug }}/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                                View Details →
+                            </a>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+
+                <div id="no-results" class="no-results hidden">
+                    <div class="no-results-content">
+                        <i class="fas fa-search no-results-icon"></i>
+                        <h3>No agents found</h3>
+                        <p>Try adjusting your search criteria or filters.</p>
+                    </div>
+                </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+{{ end }}

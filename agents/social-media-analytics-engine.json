@@ -1,0 +1,72 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Social Media Analytics Engine",
+  "description": "Analyzes social media performance, engagement metrics, and content optimization across multiple platforms",
+  "url": "https://social.northwind.com/a2a",
+  "version": "3.0.1",
+  "provider": {
+    "organization": "Northwind Traders",
+    "url": "https://northwind.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/csv",
+    "application/pdf"
+  ],
+  "skills": [
+    {
+      "id": "analyzeEngagement",
+      "name": "analyzeEngagement",
+      "description": "Tracks and analyzes engagement metrics across social media platforms",
+      "tags": [
+        "social-media",
+        "analytics",
+        "engagement",
+        "metrics"
+      ],
+      "examples": [
+        "Analyze Instagram post engagement",
+        "Track Twitter mention sentiment",
+        "Compare platform performance"
+      ],
+      "inputModes": [
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/csv"
+      ]
+    },
+    {
+      "id": "optimizeContent",
+      "name": "optimizeContent",
+      "description": "Provides content optimization recommendations based on performance data",
+      "tags": [
+        "social-media",
+        "optimization",
+        "content",
+        "recommendations"
+      ],
+      "examples": [
+        "Suggest best posting times",
+        "Recommend content formats",
+        "Optimize hashtag strategy"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ]
+}

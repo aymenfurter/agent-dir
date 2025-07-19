@@ -1,0 +1,69 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Weather Forecast Agent",
+  "description": "AI agent that provides detailed weather forecasts and climate information for any location worldwide",
+  "url": "https://weather-agent.example.com/a2a",
+  "version": "2.0.1",
+  "iconUrl": "https://weather-agent.example.com/icon.png",
+  "documentationUrl": "https://weather-agent.example.com/docs",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "getCurrentWeather",
+      "name": "getCurrentWeather",
+      "description": "Get current weather conditions for a specific location",
+      "tags": [
+        "weather",
+        "current",
+        "conditions"
+      ],
+      "examples": [
+        "What's the current weather in New York?",
+        "Get current conditions for London, UK",
+        "Current weather for 10001 ZIP code"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    },
+    {
+      "id": "getWeatherForecast",
+      "name": "getWeatherForecast",
+      "description": "Get weather forecast for the next 7 days",
+      "tags": [
+        "weather",
+        "forecast",
+        "prediction"
+      ],
+      "examples": [
+        "What's the 5-day forecast for Paris?",
+        "Get 7-day weather outlook for Tokyo",
+        "Weekly forecast for coordinates 40.7128,-74.0060"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "application/json",
+        "text/plain"
+      ]
+    }
+  ]
+}

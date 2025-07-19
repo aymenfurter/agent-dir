@@ -1,0 +1,144 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Agent Directory Template</h1>
+        <p>A Git-based template for documenting and discovering your A2A-compatible agents. Perfect for maintaining an internal agent inventory and enabling team discoverability.</p>
+        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 2rem;"><em>Note: This is a sample implementation, not affiliated with the official A2A protocol</em></p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/agents/" class="btn btn-primary">
+                🔍 Browse Sample Agents
+            </a>
+            <a href="/docs/" class="btn btn-secondary">
+                📚 Documentation
+            </a>
+            <a href="https://github.com/aymenfurter/agent-directory" class="btn btn-secondary" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> &nbsp; Get Template
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Stats Section -->
+<section class="section">
+    <div class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">{{ len .Site.Data.agents.agents }}</div>
+                <div class="stat-label">Sample Agents</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">A2A Compatible</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Database Required</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Agents Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Sample Agents</h2>
+            <p class="section-subtitle">Explore the template with these example agent configurations</p>
+        </div>
+        
+        <div class="agents-grid">
+            {{ range first 6 .Site.Data.agents.agents }}
+            {{ $agentSlug := .slug }}
+            <div class="agent-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                    <h3 style="margin: 0; flex: 1;">{{ .name }}</h3>
+                    <span class="agent-version">v{{ .version }}</span>
+                </div>
+                
+                <p class="agent-description line-clamp-3">{{ .description }}</p>
+                
+                <div class="capabilities">
+                    {{ if .capabilities.streaming }}
+                    <span class="capability supported">🚀 Streaming</span>
+                    {{ end }}
+                    {{ if .capabilities.pushNotifications }}
+                    <span class="capability supported">🔔 Push Notifications</span>
+                    {{ end }}
+                    {{ if .capabilities.stateTransitionHistory }}
+                    <span class="capability supported">📝 State History</span>
+                    {{ end }}
+                </div>
+                
+                {{ if .skills }}
+                <div class="skills">
+                    <div class="skills-title">Skills ({{ len .skills }})</div>
+                    <div class="skills-list">
+                        {{ range first 3 .skills }}
+                        • {{ .name }}<br>
+                        {{ end }}
+                        {{ if gt (len .skills) 3 }}
+                        <em>... and {{ sub (len .skills) 3 }} more</em>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem;">
+                    <div style="color: var(--text-muted); font-size: 0.875rem;">
+                        Protocol v{{ .protocolVersion }}
+                    </div>
+                    <a href="/agents/{{ $agentSlug }}/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        View Sample →
+                    </a>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/agents/" class="btn btn-primary">
+                View All Sample Agents →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Getting Started Section -->
+<section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title">
+            <h2>Quick Start</h2>
+            <p class="section-subtitle">Get your agent directory running in minutes</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: bold;">1</div>
+                <h3>Clone Template</h3>
+                <p>Fork or clone the repository to get started with the template structure and sample agents.</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: bold;">2</div>
+                <h3>Add Your Agents</h3>
+                <p>Replace sample agents with your own JSON configurations following the A2A protocol schema.</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: white; font-size: 1.5rem; font-weight: bold;">3</div>
+                <h3>Deploy</h3>
+                <p>Deploy to GitHub Pages, Netlify, or any static hosting service. Your team can start discovering agents immediately.</p>
+            </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 3rem;">
+            <a href="https://github.com/aymenfurter/agent-directory" class="btn btn-primary" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>&nbsp; Get the Template
+            </a>
+        </div>
+    </div>
+</section>
+
+{{ end }}

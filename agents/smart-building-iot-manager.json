@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Smart Building IoT Manager",
+  "description": "Comprehensive IoT management system for smart buildings with automated climate control and energy optimization",
+  "url": "https://iot-manager.alpineski.com/a2a",
+  "version": "2.7.3",
+  "provider": {
+    "organization": "Alpine Ski House",
+    "url": "https://alpineski.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json", "application/xml"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "monitorDevices",
+      "name": "monitorDevices",
+      "description": "Continuously monitors IoT devices and sensors throughout the building infrastructure",
+      "tags": ["iot", "monitoring", "sensors", "building"],
+      "examples": [
+        "Monitor HVAC system performance",
+        "Track occupancy sensor data",
+        "Check security system status"
+      ]
+    },
+    {
+      "id": "optimizeEnergy",
+      "name": "optimizeEnergy",
+      "description": "Automatically adjusts building systems to optimize energy consumption and reduce costs",
+      "tags": ["iot", "energy", "optimization", "automation"],
+      "examples": [
+        "Optimize lighting based on occupancy",
+        "Adjust HVAC for energy efficiency",
+        "Manage power consumption across systems"
+      ]
+    }
+  ]
+}

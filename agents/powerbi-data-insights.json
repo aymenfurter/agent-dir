@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "PowerBI Data Insights",
+  "description": "Generates automated insights and visualizations from PowerBI datasets with intelligent data analysis",
+  "url": "https://powerbi-insights.litware.com/a2a",
+  "version": "3.2.1",
+  "provider": {
+    "organization": "Litware Inc",
+    "url": "https://litware.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json", "text/csv"],
+  "defaultOutputModes": ["application/json", "image/png"],
+  "skills": [
+    {
+      "id": "generateInsights",
+      "name": "generateInsights",
+      "description": "Analyzes PowerBI data and generates automated insights with trend analysis",
+      "tags": ["powerbi", "analytics", "insights", "data"],
+      "examples": [
+        "Generate insights from sales dashboard",
+        "Analyze customer behavior patterns",
+        "Identify revenue trends and anomalies"
+      ]
+    },
+    {
+      "id": "createVisualization",
+      "name": "createVisualization",
+      "description": "Creates dynamic visualizations and charts based on data analysis results",
+      "tags": ["powerbi", "visualization", "charts", "reporting"],
+      "examples": [
+        "Create sales performance dashboard",
+        "Generate monthly revenue charts",
+        "Build customer segmentation visualization"
+      ]
+    }
+  ]
+}

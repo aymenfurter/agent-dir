@@ -1,0 +1,41 @@
+{
+  "name": "a2a-agent-directory",
+  "version": "1.0.0",
+  "description": "A professional static website showcasing A2A agents built with Hugo",
+  "scripts": {
+    "dev": "npm run generate && hugo server -D --bind 0.0.0.0 --baseURL http://localhost",
+    "build": "npm run generate && hugo --minify",
+    "clean": "rm -rf public",
+    "preview": "hugo server --environment production",
+    "deploy": "npm run build && npm run deploy:netlify",
+    "deploy:netlify": "netlify deploy --prod --dir=public",
+    "deploy:vercel": "vercel --prod",
+    "validate": "npm run validate:html && npm run validate:css",
+    "validate:html": "html-validate public/**/*.html",
+    "validate:css": "stylelint themes/a2a-theme/static/css/**/*.css",
+    "lighthouse": "lighthouse http://localhost:1313 --output=html --output-path=./lighthouse-report.html",
+    "test": "npm run build && npm run validate",
+    "generate": "node scripts/generate-agent-pages.js",
+  },
+  "keywords": [
+    "a2a",
+    "agents",
+    "ai",
+    "hugo",
+    "static-site",
+    "directory"
+  ],
+  "author": "A2A Community",
+  "license": "MIT",
+  "devDependencies": {
+    "@netlify/cli": "^17.0.0",
+    "html-validate": "^8.0.0",
+    "lighthouse": "^11.0.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0",
+    "vercel": "^33.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

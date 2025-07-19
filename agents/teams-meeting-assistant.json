@@ -1,0 +1,60 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Teams Meeting Assistant",
+  "description": "Intelligent meeting assistant that schedules, manages, and provides insights for Microsoft Teams meetings",
+  "url": "https://teams-assistant.northwind.com/a2a",
+  "version": "1.8.5",
+  "provider": {
+    "organization": "Northwind Traders",
+    "url": "https://northwind.com"
+  },
+  "iconUrl": "https://teams-assistant.northwind.com/icon.png",
+  "documentationUrl": "https://teams-assistant.northwind.com/docs",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true,
+    "stateTransitionHistory": false
+  },
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "scheduleMeeting",
+      "name": "scheduleMeeting",
+      "description": "Intelligently schedules Teams meetings by finding optimal times and managing attendee availability",
+      "tags": ["teams", "scheduling", "meetings", "calendar"],
+      "examples": [
+        "Schedule a project review meeting for next week",
+        "Find time for quarterly planning session",
+        "Book weekly team standup meeting"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json", "text/plain"]
+    },
+    {
+      "id": "generateMeetingSummary",
+      "name": "generateMeetingSummary",
+      "description": "Creates comprehensive meeting summaries with action items and key decisions",
+      "tags": ["teams", "summary", "notes", "action-items"],
+      "examples": [
+        "Summarize project kickoff meeting",
+        "Extract action items from team retrospective",
+        "Generate meeting notes with decisions made"
+      ],
+      "inputModes": ["application/json"],
+      "outputModes": ["text/markdown", "application/json"]
+    }
+  ]
+}

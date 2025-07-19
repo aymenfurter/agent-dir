@@ -1,0 +1,53 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Tax Optimization Agent",
+  "description": "AI agent that analyzes expenses and suggests tax optimization strategies",
+  "url": "https://tax-agent.example.com/a2a",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "Tax Bot Inc",
+    "url": "https://example.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/markdown"
+  ],
+  "skills": [
+    {
+      "id": "analyze_deductions",
+      "name": "Tax Deduction Analysis",
+      "description": "Analyzes business and personal expenses to identify eligible tax deductions according to current IRS regulations. Reviews expense categories, validates deductibility requirements, calculates potential savings, and flags any compliance concerns. Supports both individual and business tax scenarios with detailed explanations of applicable tax codes.",
+      "tags": [
+        "finance",
+        "tax",
+        "optimization",
+        "deductions"
+      ],
+      "examples": [
+        "Analyze business expenses for tax deductions",
+        "Identify potential tax savings opportunities", 
+        "Review my mileage log for deductible business travel"
+      ]
+    }
+  ]
+}

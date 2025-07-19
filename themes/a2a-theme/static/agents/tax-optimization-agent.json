@@ -1,0 +1,63 @@
+{
+  "name": "Tax Optimization Agent",
+  "description": "AI agent that analyzes expenses and suggests tax optimization strategies",
+  "url": "https://tax-agent.example.com/a2a",
+  "version": "1.0.0",
+  "protocolVersion": "0.2.5",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/markdown"],
+  "skills": [
+    {
+      "id": "analyze_deductions",
+      "name": "Tax Deduction Analysis",
+      "description": "Analyzes business and personal expenses to identify eligible tax deductions according to current IRS regulations. Reviews expense categories, validates deductibility requirements, calculates potential savings, and flags any compliance concerns. Supports both individual and business tax scenarios with detailed explanations of applicable tax codes.",
+      "inputModes": ["application/json", "text/csv"],
+      "outputModes": ["application/json", "text/markdown"],
+      "examples": [
+        {
+          "description": "Analyze business expenses for tax deductions",
+          "input": {
+            "tax_year": 2024,
+            "entity_type": "sole_proprietorship",
+            "expenses": [
+              {"category": "office_supplies", "amount": 1200, "description": "Paper, ink, software licenses"},
+              {"category": "travel", "amount": 3500, "description": "Client meetings, conferences"},
+              {"category": "meals", "amount": 800, "description": "Business lunches with clients"}
+            ]
+          },
+          "output": {
+            "deductions_found": [
+              {"category": "office_supplies", "deductible_amount": 1200, "tax_code": "Section 162", "confidence": "high"},
+              {"category": "business_travel", "deductible_amount": 3500, "tax_code": "Section 162", "confidence": "high"},
+              {"category": "business_meals", "deductible_amount": 400, "tax_code": "Section 274", "confidence": "medium", "note": "50% limit applies"}
+            ],
+            "total_deductions": 5100,
+            "estimated_tax_savings": 1530,
+            "recommendations": ["Keep detailed meal receipts", "Document business purpose for all travel"]
+          }
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "name": "Tax Bot Inc",
+    "email": "contact@taxbot.com"
+  },
+  "tags": ["finance", "tax", "optimization", "deductions"]
+}

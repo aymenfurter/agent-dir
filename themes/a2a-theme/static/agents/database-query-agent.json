@@ -1,0 +1,77 @@
+{
+  "name": "Database Query Agent",
+  "description": "AI agent that executes database queries, performs data analysis, and generates reports from various database systems",
+  "url": "https://db-agent.example.com/a2a",
+  "version": "1.5.0",
+  "protocolVersion": "0.2.5",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "securitySchemes": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key"
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/csv", "application/pdf"],
+  "skills": [
+    {
+      "name": "executeQuery",
+      "description": "Execute SQL queries on connected databases with safety checks and result formatting",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "SQL query to execute" },
+          "database": { "type": "string", "description": "Database connection name" },
+          "format": { "type": "string", "enum": ["json", "csv", "table"], "default": "json" },
+          "limit": { "type": "number", "maximum": 10000, "default": 1000 }
+        },
+        "required": ["query", "database"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "results": { "type": "array" },
+          "rowCount": { "type": "number" },
+          "executionTime": { "type": "number" },
+          "columns": { "type": "array" }
+        }
+      }
+    },
+    {
+      "name": "generateReport",
+      "description": "Generate formatted reports from database data with charts and visualizations",
+      "input": {
+        "type": "object",
+        "properties": {
+          "reportType": { "type": "string", "enum": ["summary", "detailed", "chart"] },
+          "dataSource": { "type": "string" },
+          "filters": { "type": "object" },
+          "outputFormat": { "type": "string", "enum": ["pdf", "html", "excel"] }
+        },
+        "required": ["reportType", "dataSource"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "reportUrl": { "type": "string" },
+          "reportData": { "type": "object" },
+          "generatedAt": { "type": "string" }
+        }
+      }
+    }
+  ],
+  "contact": {
+    "name": "Data Engineering Team",
+    "email": "data@company.com"
+  },
+  "tags": ["database", "sql", "analytics", "reporting", "data"]
+}

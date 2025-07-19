@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Azure Cost Optimizer",
+  "description": "Analyzes Azure resource usage and provides cost optimization recommendations with automated scaling suggestions",
+  "url": "https://cost-optimizer.contoso.com/a2a",
+  "version": "1.4.2",
+  "provider": {
+    "organization": "Contoso Corporation",
+    "url": "https://contoso.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "analyzeResourceCosts",
+      "name": "analyzeResourceCosts",
+      "description": "Analyzes Azure resource usage patterns and identifies cost optimization opportunities",
+      "tags": ["azure", "cost", "optimization", "analytics"],
+      "examples": [
+        "Analyze monthly Azure spending patterns",
+        "Identify underutilized virtual machines",
+        "Review storage cost optimization opportunities"
+      ]
+    },
+    {
+      "id": "generateOptimizationReport",
+      "name": "generateOptimizationReport",
+      "description": "Creates detailed cost optimization reports with actionable recommendations",
+      "tags": ["azure", "reporting", "cost", "recommendations"],
+      "examples": [
+        "Generate comprehensive cost optimization report",
+        "Create monthly savings recommendations",
+        "Build resource rightsizing analysis"
+      ]
+    }
+  ]
+}

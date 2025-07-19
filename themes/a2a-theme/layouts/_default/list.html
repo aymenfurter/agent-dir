@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="docs-page">
+    <div class="container">
+        <div class="docs-header">
+            <h1>{{ .Title }}</h1>
+            {{ if .Description }}
+            <p>{{ .Description }}</p>
+            {{ end }}
+        </div>
+        
+        <div class="docs-content">
+            {{ .Content }}
+        </div>
+
+        {{ if .Pages }}
+        <div class="docs-subpages">
+            <h2>Documentation Pages</h2>
+            <div class="subpages-grid">
+                {{ range .Pages }}
+                <div class="subpage-card">
+                    <h3>
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{ if .Description }}
+                    <p>{{ .Description }}</p>
+                    {{ end }}
+                    <div class="subpage-meta">
+                        {{ .Date.Format "January 2, 2006" }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

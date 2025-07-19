@@ -1,0 +1,58 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Financial Risk Assessment AI",
+  "description": "Evaluates financial risks, performs credit analysis, and generates risk assessment reports for investment decisions",
+  "url": "https://risk.wide-world-importers.com/a2a",
+  "version": "1.7.0",
+  "provider": {
+    "organization": "Wide World Importers",
+    "url": "https://wide-world-importers.com"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "application/json",
+    "text/csv"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "application/pdf",
+    "text/csv"
+  ],
+  "skills": [
+    {
+      "id": "assessCreditRisk",
+      "name": "assessCreditRisk",
+      "description": "Analyzes credit profiles and generates risk scores for lending decisions",
+      "tags": [
+        "finance",
+        "risk",
+        "credit",
+        "analysis"
+      ],
+      "examples": [
+        "Evaluate loan application risk",
+        "Assess corporate credit rating",
+        "Calculate default probability"
+      ]
+    },
+    {
+      "id": "generateRiskReport",
+      "name": "generateRiskReport",
+      "description": "Creates comprehensive risk assessment reports with recommendations",
+      "tags": [
+        "finance",
+        "reporting",
+        "risk",
+        "analysis"
+      ],
+      "examples": [
+        "Generate portfolio risk report",
+        "Create investment risk analysis",
+        "Build compliance risk summary"
+      ]
+    }
+  ]
+}

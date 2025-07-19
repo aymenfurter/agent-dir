@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Security Compliance Scanner",
+  "description": "Automated security vulnerability scanner that performs compliance checks and generates security assessment reports",
+  "url": "https://security-scanner.proseware.com/a2a",
+  "version": "1.9.4",
+  "provider": {
+    "organization": "Proseware Inc",
+    "url": "https://proseware.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "application/pdf"],
+  "skills": [
+    {
+      "id": "scanVulnerabilities",
+      "name": "scanVulnerabilities",
+      "description": "Performs comprehensive security vulnerability scans on systems and applications",
+      "tags": ["security", "vulnerability", "scanning", "assessment"],
+      "examples": [
+        "Scan web application for security vulnerabilities",
+        "Perform network security assessment",
+        "Check system configuration for security issues"
+      ]
+    },
+    {
+      "id": "checkCompliance",
+      "name": "checkCompliance",
+      "description": "Validates systems against security compliance standards and frameworks",
+      "tags": ["security", "compliance", "standards", "audit"],
+      "examples": [
+        "Check GDPR compliance status",
+        "Validate SOC 2 compliance requirements",
+        "Assess HIPAA security controls"
+      ]
+    }
+  ]
+}

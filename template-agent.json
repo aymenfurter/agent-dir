@@ -1,0 +1,59 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Your Agent Name",
+  "description": "Detailed description of what your agent does and its main capabilities",
+  "url": "https://your-agent.example.com/a2a",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "Your Organization Name",
+    "url": "https://your-organization.com"
+  },
+  "iconUrl": "https://your-agent.example.com/icon.png",
+  "documentationUrl": "https://your-agent.example.com/docs",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true,
+    "stateTransitionHistory": false
+  },
+  "securitySchemes": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key"
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "exampleSkill",
+      "name": "exampleSkill",
+      "description": "Description of what this skill does and how it helps users",
+      "tags": ["category", "feature", "type"],
+      "examples": [
+        "How to use this skill - example 1",
+        "Another way to use this skill",
+        "Advanced usage example"
+      ],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json", "text/plain"]
+    },
+    {
+      "id": "anotherSkill",
+      "name": "anotherSkill",
+      "description": "Description of another capability of your agent",
+      "tags": ["feature", "automation"],
+      "examples": [
+        "Basic usage example",
+        "Advanced configuration example"
+      ],
+      "inputModes": ["text/plain"],
+      "outputModes": ["text/plain", "text/markdown"]
+    }
+  ]
+}

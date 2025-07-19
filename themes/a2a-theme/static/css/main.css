@@ -1,0 +1,337 @@
+/* 
+Agent Directory - Main Stylesheet
+Modern, professional design for tech startup aesthetic
+*/
+
+/* Import all stylesheets in the correct order */
+@import url('./variables.css');
+@import url('./base.css');
+@import url('./layout.css');
+@import url('./navigation.css');
+@import url('./components.css');
+@import url('./pages.css');
+
+/* Additional modern enhancements */
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* Modern scrollbar for webkit browsers */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-dark) var(--bg-secondary);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--border-dark);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-secondary);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+/* Enhanced button hover effects */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Card hover animations */
+.agent-card {
+  transform-origin: center;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.agent-card:hover {
+  animation: subtle-float 0.3s ease-out;
+}
+
+@keyframes subtle-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Gradient text animation for hero */
+.hero h1 {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced loading animation */
+.spinner {
+  position: relative;
+}
+
+.spinner::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+  animation: spin 2s linear infinite;
+  z-index: -1;
+  filter: blur(1px);
+}
+
+/* Glass morphism effects for modern cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced dark mode support */
+@media (prefers-color-scheme: dark) {
+  .hero {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+  }
+  
+  .glass-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Print optimizations */
+@media print {
+  .hero {
+    background: none !important;
+    color: black !important;
+  }
+  
+  .btn, .search-box, .header-controls {
+    display: none !important;
+  }
+  
+  .agent-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #0066cc;
+    --bg: #ffffff;
+    --text: #000000;
+    --border: #666666;
+  }
+  
+  .btn-primary {
+    background: #0066cc;
+    border: 2px solid #004499;
+  }
+  
+  .agent-card {
+    border: 2px solid #666666;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hero h1 {
+    animation: none;
+  }
+  
+  .btn::before {
+    transition: none;
+  }
+  
+  .agent-card:hover {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* Enhanced mobile experience */
+@media (max-width: 480px) {
+  /* Larger touch targets for mobile */
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Better mobile card spacing */
+  .agent-card {
+    margin-bottom: var(--space-4);
+  }
+  
+  /* Improved mobile typography */
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+/* Force GPU acceleration for smooth animations */
+.agent-card,
+.btn,
+.hero {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Selection improvements */
+::selection {
+  background: var(--primary-100);
+  text-shadow: none;
+}
+
+/* Enhanced focus indicators for keyboard navigation */
+.btn:focus-visible,
+.search-input:focus-visible,
+.select:focus-visible {
+  box-shadow: 
+    0 0 0 3px var(--primary-50),
+    0 0 0 1px var(--primary);
+}
+
+/* Loading state improvements */
+.loading .spinner {
+  margin: 0 auto;
+}
+
+/* Better error state styling */
+.error {
+  position: relative;
+}
+
+.error::before {
+  content: '⚠️';
+  font-size: 1.5rem;
+  margin-right: var(--space-2);
+}
+
+/* Success state improvements */
+.success::before {
+  content: '✅';
+  font-size: 1.5rem;
+  margin-right: var(--space-2);
+}
+
+/* Enhanced agent card interactions */
+.agent-card:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Better mobile menu styles */
+@media (max-width: 768px) {
+  .header-controls {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* Enhanced typography for better readability */
+p, li {
+  max-width: 65ch; /* Optimal reading width */
+}
+
+/* Improved code block styling */
+pre code {
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* Better table responsive behavior */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: var(--space-2);
+  }
+}
+
+/* Enhanced accessibility for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--radius);
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

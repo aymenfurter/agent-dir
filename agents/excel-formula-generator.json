@@ -1,0 +1,41 @@
+{
+  "protocolVersion": "0.2.6",
+  "name": "Excel Formula Generator",
+  "description": "Generates complex Excel formulas and provides spreadsheet automation solutions with intelligent data processing",
+  "url": "https://excel-formulas.contoso.com/a2a",
+  "version": "2.0.3",
+  "provider": {
+    "organization": "Contoso Bank",
+    "url": "https://contoso.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "skills": [
+    {
+      "id": "generateFormula",
+      "name": "generateFormula",
+      "description": "Creates complex Excel formulas based on natural language descriptions and data requirements",
+      "tags": ["excel", "formulas", "automation", "spreadsheet"],
+      "examples": [
+        "Create a VLOOKUP formula for product pricing",
+        "Generate conditional formatting formula for sales targets",
+        "Build a pivot table summary formula"
+      ]
+    },
+    {
+      "id": "optimizeSpreadsheet",
+      "name": "optimizeSpreadsheet",
+      "description": "Analyzes Excel files and suggests performance optimizations and formula improvements",
+      "tags": ["excel", "optimization", "performance", "analysis"],
+      "examples": [
+        "Optimize slow-running spreadsheet calculations",
+        "Suggest formula improvements for better performance",
+        "Analyze data structure efficiency"
+      ]
+    }
+  ]
+}
