@@ -15,7 +15,7 @@
     "validate:css": "stylelint themes/a2a-theme/static/css/**/*.css",
     "lighthouse": "lighthouse http://localhost:1313 --output=html --output-path=./lighthouse-report.html",
     "test": "npm run build && npm run validate",
-    "generate": "node scripts/generate-agent-pages.js",
+    "generate": "node scripts/generate-agent-pages.js"
   },
   "keywords": [
     "a2a",
