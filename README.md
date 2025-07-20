@@ -1,41 +1,61 @@
-# Agent Directory Template
+<h1 align="center">Agent Directory Template</h1>
 
+<p align="center">
 A Git-based template for creating internal inventories of A2A-compatible AI agents. This project provides a beautiful, searchable interface for documenting and discovering agents within your organization.
+</p>
 
-**🌟 [View Live Demo](https://aymenfurter.github.io/agent-dir/)**
+<p align="center">
+  <a href="https://aymenfurter.github.io/agent-dir/">🔗 View Live Demo</a>
+</p>
 
-![Agent Directory Screenshot](https://raw.githubusercontent.com/aymenfurter/agent-dir/main/screenshot.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aymenfurter/agent-dir/main/screenshot.png" alt="Agent Directory Screenshot" width="700"/>
+</p>
 
-> **Note**: This is a sample implementation and template, not affiliated with the official A2A protocol. It's designed for documentation and team discoverability purposes.
+<blockquote>
+<b>Note</b>: This is a sample implementation and template, not affiliated with the official A2A protocol. It's designed for documentation and team discoverability purposes.
+</blockquote>
 
-## What Is This?
+<hr/>
 
-The Agent Directory Template is a **static site generator** that helps organizations:
+<h2>What Is This?</h2>
 
-- **Document AI agents** using A2A protocol standards.
-- **Enable team discovery** of existing agents before building new ones.
-- **Maintain a searchable inventory** of agent capabilities and endpoints.
-- **Version control** agent documentation through Git.
-- **Deploy quickly** to any static hosting service.
+<p>The Agent Directory Template is a <b>static site generator</b> that helps organizations:</p>
 
-This is **not** a runtime agent management system or an official A2A protocol agent discovery implementation—it's purely for documentation and human discoverability.
+<ul>
+  <li>Document AI agents using A2A protocol standards</li>
+  <li>Enable team discovery of existing agents before building new ones</li>
+  <li>Maintain a searchable inventory of agent capabilities and endpoints</li>
+  <li>Version control agent documentation through Git</li>
+  <li>Deploy quickly to any static hosting service</li>
+</ul>
 
-## ⚙️ How It Works
+<p><b>This is not</b> a runtime agent management system or an official A2A protocol agent discovery implementation. It's purely for documentation and human discoverability.</p>
 
-This template uses a **GitOps workflow** to automatically build and deploy your agent directory. You simply add or update agent JSON files, and a GitHub Action handles the rest.
+<hr/>
 
-![Agent Directory Workflow Diagram](https://raw.githubusercontent.com/aymenfurter/agent-dir/main/workflow.png)
+<h2>How It Works</h2>
 
-1.  **Commit JSON:** Developers add or update agent definitions in the `/agents` directory.
-2.  **CI/CD Trigger:** A push to the `main` branch triggers the GitHub Actions workflow.
-3.  **Generate & Build:** The workflow runs a script to generate Markdown pages from your JSON files and then builds the static site using Hugo.
-4.  **Deploy:** The final static site is automatically deployed to GitHub Pages.
+<p>This template uses a <b>GitOps workflow</b> to automatically build and deploy your agent directory. You simply add or update agent JSON files, and a GitHub Action handles the rest.</p>
 
-## 🔧 Adding Your Agents
+<p align="center">
+  <img src="https://raw.githubusercontent.com/aymenfurter/agent-dir/main/workflow.png" alt="Agent Directory Workflow" width="700"/>
+</p>
 
-### 1. Create Agent JSON Files
+<ol>
+  <li><b>Commit JSON:</b> Developers add or update agent definitions in the <code>/agents</code> directory.</li>
+  <li><b>CI/CD Trigger:</b> A push to the <code>main</code> branch triggers the GitHub Actions workflow.</li>
+  <li><b>Generate & Build:</b> The workflow runs a script to generate Markdown pages from your JSON files and then builds the static site using Hugo.</li>
+  <li><b>Deploy:</b> The final static site is automatically deployed to GitHub Pages.</li>
+</ol>
 
-Add your agent configurations as individual `.json` files in the `/agents` directory. You can use `template-agent.json` as a starting point.
+<hr/>
+
+<h2>Adding Your Agents</h2>
+
+<h3>1. Create Agent JSON Files</h3>
+
+<p>Add your agent configurations as individual <code>.json</code> files in the <code>/agents</code> directory. You can use <code>template-agent.json</code> as a starting point.</p>
 
 ```json
 {
@@ -67,28 +87,33 @@ Add your agent configurations as individual `.json` files in the `/agents` direc
 }
 ```
 
-### 2. Commit and Push
+<h3>2. Commit and Push</h3>
 
-Commit your new agent file and push it to the `main` branch. The GitHub Action will automatically update the live site.
+<p>Commit your new agent file and push it to the <code>main</code> branch. The GitHub Action will automatically update the live site.</p>
 
-## 🚀 Local Development
+<hr/>
 
-1.  **Clone the repository:**
-    ```sh
-    git clone https://github.com/aymenfurter/agent-dir.git
-    cd agent-dir
-    ```
-2.  **Install dependencies:**
-    ```sh
-    npm install
-    ```
-3.  **Run the dev server:**
-    This script generates the pages and starts the Hugo server with live reloading.
-    ```sh
-    npm run dev
-    ```
-4.  Open your browser to `http://localhost:1313`.
+<h2>Local Development</h2>
 
-## 📄 License
+<ol>
+  <li><b>Clone the repository:</b></li>
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+  <pre><code>git clone https://github.com/aymenfurter/agent-dir.git
+cd agent-dir</code></pre>
+
+  <li><b>Install dependencies:</b></li>
+
+  <pre><code>npm install</code></pre>
+
+  <li><b>Run the dev server:</b></li>
+
+  <pre><code>npm run dev</code></pre>
+
+  <li>Open your browser to <code>http://localhost:1313</code></li>
+</ol>
+
+<hr/>
+
+<h2>License</h2>
+
+<p>This project is licensed under the <b>MIT License</b>. See the <a href="./LICENSE">LICENSE</a> file for details.</p>
