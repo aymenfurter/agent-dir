@@ -2,7 +2,7 @@
 
 A Git-based template for creating internal inventories of A2A-compatible AI agents. This project provides a beautiful, searchable interface for documenting and discovering agents within your organization.
 
-**🌟 [View Live Demo](https://aymenfurter.github.io/agent-directory/)**
+**🌟 [View Live Demo](https://aymenfurter.github.io/agent-dir/)**
 
 > **Note**: This is a sample implementation and template, not affiliated with the official A2A protocol. It's designed for documentation and team discoverability purposes.
 
