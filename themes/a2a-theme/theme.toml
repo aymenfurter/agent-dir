@@ -1,12 +1,12 @@
 name = "A2A Agent Directory Theme"
 license = "MIT"
-licenselink = "https://github.com/aymenfurter/agent-directory/blob/main/LICENSE"
+licenselink = "https://github.com/aymenfurter/agent-dir/blob/main/LICENSE"
 description = "A template theme for creating agent directories using A2A protocol documentation standards"
-homepage = "https://github.com/aymenfurter/agent-directory"
+homepage = "https://github.com/aymenfurter/agent-dir"
 tags = ["agents", "directory", "documentation", "template", "a2a-protocol"]
 features = ["responsive", "search", "filtering", "git-based"]
 min_version = "0.100.0"
 
 [author]
   name = "Agent Directory Template"
-  homepage = "https://github.com/aymenfurter/agent-directory"
+  homepage = "https://github.com/aymenfurter/agent-dir"
